@@ -16,28 +16,28 @@ import java.util.Collections;
 
 
 public class Hand implements Comparable<Hand> {
-    
+
     private ArrayList<Card> hand;
-    
+
     public Hand() {
         this.hand = new ArrayList<>();
     }
-    
+
     public void add(Card card) {
         this.hand.add(card);
     }
-    
+
     public void print() {
         Iterator<Card> iterator = hand.iterator();
         while(iterator.hasNext()) {
             System.out.println(iterator.next().toString());
         }
     }
-    
+
     public void sort() {
         Collections.sort(this.hand, (card1, card2) -> card1.compareTo(card2));
     }
-    
+
     public int compareTo(Hand comparedHand) {
         int thisValue = this.hand.stream()
                 .mapToInt(card -> card.getValue())
@@ -47,10 +47,10 @@ public class Hand implements Comparable<Hand> {
                 .sum();
         return thisValue - comparedValue;
     }
-    
+
     public void sortBySuit() {
-        Collections.sort(this.hand, new BySuitInValueOrder());
+        Collections.sort(this.hand, new Card.BySuitInValueOrder());
     }
-    
-    
+
+
 }

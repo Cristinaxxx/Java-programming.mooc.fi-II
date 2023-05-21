@@ -1,4 +1,4 @@
-
+import java.util.Comparator;
 
 public class Card implements Comparable<Card> {
 
@@ -26,7 +26,7 @@ public class Card implements Comparable<Card> {
         } else if (value == 14) {
             cardValue = "A";
         }
-        
+
         return suit + " " + cardValue;
     }
 
@@ -37,11 +37,29 @@ public class Card implements Comparable<Card> {
     public Suit getSuit() {
         return suit;
     }
-    
+
     public int compareTo(Card comparedCard) {
         if(this.value == comparedCard.getValue()) {
             return this.suit.ordinal() - comparedCard.suit.ordinal();
         } else return this.value - comparedCard.getValue();
+    }
+
+
+    class SortBySuit implements Comparator<Card> {
+
+        public int compare(Card c1, Card c2) {
+            return c1.getSuit().ordinal() - c2.getSuit().ordinal();
+        }
+    }
+
+    static class BySuitInValueOrder implements Comparator<Card> {
+
+        public int compare(Card c1, Card c2) {
+            if(c1.getSuit().ordinal() == c2.getSuit().ordinal()) {
+                return c1.getValue() - c2.getValue();
+            } else return c1.getSuit().ordinal() - c2.getSuit().ordinal();
+        }
+
     }
 
 }
